@@ -1,17 +1,28 @@
 import React, { Component } from "react";
-import Axios from "axios";
+import { fetchPosts } from "../redux/actions";
+import { connect } from "react-redux";
 
 export class index extends Component {
-  //   static async getInitialProps() {
-  //     const test = await Axios.post(
-  //       "https://e-commerce-gig.herokuapp.com/api/products"
-  //     );
-  //     console.log(test);
-  //     return {};
-  //   }
+  componentDidMount() {
+    this.props.fetchPosts();
+  }
   render() {
-    return <div>next</div>;
+    return (
+      <div>
+        {this.props.posts &&
+          this.props.posts.map(post => (
+            <div key={post.id}>
+              <h3>{post.title}</h3>
+              <p>{post.body}</p>
+            </div>
+          ))}
+      </div>
+    );
   }
 }
-
-export default index;
+const mapStateToProps = state => {
+  return {
+    posts: state.postReducer.posts
+  };
+};
+export default connect(mapStateToProps, { fetchPosts })(index);
