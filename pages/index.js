@@ -1,14 +1,21 @@
 import React, { Component } from "react";
 import { fetchPosts } from "../redux/actions";
 import { connect } from "react-redux";
+import Axios from "axios";
+import { FETCH_POSTS } from "../redux/actions/types";
+import { wrapper } from "../redux/reducers";
 
 export class index extends Component {
-  componentDidMount() {
-    this.props.fetchPosts();
+  static async getInitialProps({ store }) {
+    const res = await Axios.get("https://jsonplaceholder.typicode.com/posts");
+    store.dispatch({ type: FETCH_POSTS, payload: res.data });
+    return {};
   }
   render() {
     return (
       <div>
+        {/* {!this.props.posts && "No Data"} */}
+        {/* {console.log(this.props.posts)} */}
         {this.props.posts &&
           this.props.posts.map(post => (
             <div key={post.id}>
@@ -22,7 +29,7 @@ export class index extends Component {
 }
 const mapStateToProps = state => {
   return {
-    posts: state.postReducer.posts
+    posts: state.postReducer.server.posts
   };
 };
-export default connect(mapStateToProps, { fetchPosts })(index);
+export default wrapper.withRedux(connect(mapStateToProps)(index));
