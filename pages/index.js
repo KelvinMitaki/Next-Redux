@@ -1,7 +1,17 @@
-import React from "react";
+import React, { Component } from "react";
+import Axios from "axios";
 
-const index = () => {
-  return <div>next js</div>;
-};
+export class index extends Component {
+  //   static async getInitialProps() {
+  //     const test = await Axios.post(
+  //       "https://e-commerce-gig.herokuapp.com/api/products"
+  //     );
+  //     console.log(test);
+  //     return {};
+  //   }
+  render() {
+    return <div>next</div>;
+  }
+}
 
 export default index;
