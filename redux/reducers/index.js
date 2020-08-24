@@ -14,7 +14,6 @@ const reducer = (state, action) => {
       ...state,
       ...action.payload
     };
-    if (state.postReducer) nextState.postReducer = state.postReducer;
     return nextState;
   } else {
     return combinedReducer(state, action);
