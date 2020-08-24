@@ -1,6 +1,5 @@
-import App from "next/app";
-import { Provider } from "react-redux";
-import { wrapper, store } from "../redux/reducers";
+import { wrapper } from "../redux/reducers";
+import "semantic-ui-css/semantic.min.css";
 
 const MyApp = ({ Component, pageProps }) => {
   return <Component {...pageProps} />;

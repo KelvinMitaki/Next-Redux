@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { fetchPosts } from "../redux/actions";
 import { connect } from "react-redux";
 import { wrapper } from "../redux/reducers";
+import { Container } from "semantic-ui-react";
 
 export class index extends Component {
   static async getInitialProps({ store }) {
@@ -9,7 +10,7 @@ export class index extends Component {
   }
   render() {
     return (
-      <div>
+      <Container textAlign="center">
         {this.props.posts &&
           this.props.posts.map(post => (
             <div key={post.id}>
@@ -17,14 +18,14 @@ export class index extends Component {
               <p>{post.body}</p>
             </div>
           ))}
-      </div>
+      </Container>
     );
   }
 }
 
 const mapStateToProps = state => {
   return {
-    posts: state.postReducer.server.posts
+    posts: state.postReducer.posts
   };
 };
 export default wrapper.withRedux(connect(mapStateToProps)(index));
