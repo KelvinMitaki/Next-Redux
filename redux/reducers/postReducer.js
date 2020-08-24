@@ -12,7 +12,6 @@ const INITIAL_STATE = {
 const postReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case FETCH_POSTS:
-      //   console.log({ redux: action.payload });
       return { ...state, server: { ...state.server, posts: action.payload } };
     default:
       return state;
